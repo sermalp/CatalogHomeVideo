@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import os
 
 
@@ -10,10 +10,9 @@ def getData():
     print("request.method: "+request.method)
     if request.method == 'POST':
         adress = request.form.get('adress')
-        filtr = request.form.get('filtr')
-        #print(adress)
+        filtr = 'mp4'
         list = getListVideoFiles(adress, filtr)
-        return getTextHTML()+'<strong>Файлы из каталога: '+adress+'</strong>'+'<p>'+list+'</p>'
+        return getTextHTML()+'<h1>Файлы из каталога: '+adress+'</h1>'+'<p>'+list+'</p>'
     
     #return 'Поломка!'
 
@@ -24,17 +23,20 @@ def getListVideoFiles(adress, filtr=''):
     #file_list = os.listdir('.')  # синоним
     #file_list = os.listdir(adress)  # список имен файлов и папок в данной папке
     strList = ''
-    for file in os.scandir(adress):
-    #for file in os.listdir(adress):
+    try:
+        for file in os.scandir(adress):
+        #for file in os.listdir(adress):
+            if file.name.endswith(filtr):
+                strList = strList + file.path +'<br />'
+    except:
+        Warning
+        strList = 'Каталога с таким адрес не существует!'
 
-        if file.name.endswith(filtr):
-            strList = strList + file.path +'<br />'
-    
     return strList
 
 @app.route('/')
 def mainPage():
-    return getTextHTML()
+    return render_template("html/index.html")#return getTextHTML()
 
 
 def getTextHTML():
