@@ -1,85 +1,64 @@
 <!DOCTYPE html>
-<html>
-  <head> </head>
-  <body></body>
-</html>
-
-<!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Каталог домашнего видео</title>
-    <meta name="description" content="Описание страницы" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link
-      href="{{ url_for('static', filename = 'css/bootstrap.css') }}"
-      rel="stylesheet"
-    />
-    <link
-      href="{{ url_for('static', filename = 'css/style.css') }}"
-      rel="stylesheet"
-    />
+  <title>
+    {% if data.title %}
+    {{ data.title }}
+    {% else %}
+    Каталог домашнего видео
+    {% endif %}
+  </title>
+  <!-- <meta name="description" content="Описание страницы" /> -->
 
-    <link
-      href="{{ url_for('static', filename = 'img/favicon.png') }}"
-      rel="icon"
-    />
+  <link href="{{ url_for('static', filename = 'css/bootstrap.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename = 'css/style.css') }}" rel="stylesheet" />
+  <link href="{{ url_for('static', filename = 'img/favicon.png') }}" rel="icon" />
 
-    <!--[if lt IE 9]>
+  <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <header>
-      <!-- Шапка -->
-      <div class="container">
-        <form action="/search" method="POST">
-          <div class="row align-items-center">
-        
-            <div class="col-2">
-              <label class="col-form-label">Адрес:</label>
-            </div>
-            <div class="col-6">
-              <input type="text" name='adress' id="inputAdressCatalog" class="form-control" autofocus>
-            </div>
-            <div class="col-4">
-              <button type="submit" class="btn btn-success" >Найти видео в каталоге</button>
-            </div>
-        
+</head>
+
+<body>
+  <header>
+    <!-- Шапка -->
+    <div class="container">
+      <form action="/search" method="POST">
+        <div class="row align-items-center">
+
+          <div class="col-2">
+            <label class="col-form-label">Адрес:</label>
           </div>
-        </form>
+          <div class="col-6">
+            <input type="text" name='adress' id="inputAdressCatalog" class="form-control" autofocus>
+          </div>
+          <div class="col-4">
+            <button type="submit" class="btn btn-success">Найти видео в каталоге</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+
+    <nav>
+      <!-- Навигация -->
+    </nav>
+
+  </header>
+  <main>
+    <section>
+      <div class="container catalog_all_video">
+        {% block block_video %}{% endblock %}
       </div>
+    </section>
+  </main>
+  <!-- <aside>Боковая колонка (сайдбар)</aside> -->
+  <footer>Подвал</footer>
+</body>
 
-      <nav><!-- Навигация --></nav>
-
-    </header>
-
-    <main>
-      <section>
-        <h1>Заголовок страницы</h1>
-        <div class="container">
-          
-            <div class="row align-items-center">
-          
-              <div class="col-6">
-                <div class="block_video">
-                  <video width='100%' controls="controls" poster="video/duel.jpg">
-                    <source src="c:/Downloads/Адвокат Егоров - Пчелы в бутылке.mp4">
-                   </video>
-                </div>
-                
-              </div>
-              <div class="col-6">
-                <img src="..." class="img-fluid" alt="...">
-              </div>          
-            </div>
-          
-      </section>
-    </main>
-    <aside>Боковая колонка (сайдбар)</aside>
-    <footer>Подвал</footer>
-  </body>
 </html>
