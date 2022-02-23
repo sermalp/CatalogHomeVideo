@@ -2,28 +2,30 @@
 
 {% block block_video %}
     
-        <div class="text-center">
-            <strong>Список видео в каталоге: {{ data.adress }}</strong>
-        </div>
-        
-
-        {% for v in data.list_video %}
-        <div class="row align-items-center">
-            <div class="col-6">
-                <div class="block_video">
-                    <video width='100%' controls="controls" poster="video/duel.jpg">
-                        <source src="{{ v.path }}">
-                    </video>
-                    <small  class="text-center">{{ v.name }}</small>
-                </div>
-            </div>
-            <div class="col-6">
-                <img src="..." class="img-fluid" alt="...">
-            </div>
-        </div>
-        {% endfor %}
-
-        
+    <div class="text-center">
+        <strong>Список видео в каталоге: {{ data.adress }}</strong>
+    </div>
     
 
+    {% for v in data.list_video %}
+    <div class="row align-items-center">
+        <div class="col-6">
+            <div class="block_video">
+                <small  class="text-center">{{ v.name }}</small>
+                <video width='100%' controls="controls" poster="video/duel.jpg">
+                    <!-- <source src="{{ url_for('static', filename = 'v.name') }}"> -->
+                    <source src="{{ v.path }}"> 
+                    Your browser doesn't support HTML5 video tag.
+                </video>
+                <small>{{ v.path }}</small>
+            </div>
+        </div>
+        <div class="col-6">
+            <img src="..." class="img-fluid" alt="...">
+        </div>
+        <hr class="block_video__hr">
+    </div>
+    {% endfor %}
+
+        
 {% endblock %}

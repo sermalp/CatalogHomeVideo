@@ -24,17 +24,17 @@ def mainPage():
 def getListVideoFiles(adress, filtr=''):
     #формирует список видео файлов в каталоге
     strList = []
-    dictVideoFile = {}
     try:
         for file in os.scandir(adress):
             if file.name.endswith(filtr):
+                dictVideoFile = {}
                 dictVideoFile['path'] = file.path
                 dictVideoFile['name'] = file.name
                 strList.append(dictVideoFile)
                 
     except:
-        Warning
-        strList = 'Каталога с таким адрес не существует!'
+        Warning('Каталога с адресом ('+adress+') не существует!')
+        #strList = 'Каталога с адресом ('+adress+') не существует!'
 
     return strList
 
