@@ -9,6 +9,7 @@ def getData():
     if request.method == 'POST':
         dict_data = {}
         dict_data['adress'] = request.form.get('adress')
+        """ x = os.chdir(dict_data['adress']) """
         dict_data['list_video'] = getListVideoFiles(dict_data['adress'], 'mp4')
         dict_data['title'] = 'Страница списка видео'
         return render_template("html/block_video.html", data=dict_data)
